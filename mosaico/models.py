@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-import logging
 import posixpath
 try:
     from urlparse import urlparse, urlunparse
@@ -7,27 +6,20 @@ except ImportError:
     from urllib.parse import urlparse, urlunparse
 
 from django.db import models
-from django.contrib.sites.models import Site
-from sorl.thumbnail import ImageField
+#from django.contrib.sites.models import Site
+#from sorl.thumbnail import ImageField
 from django.contrib.postgres.fields.jsonb import JSONField
 
 
 class Upload(models.Model):
     name = models.CharField(max_length=200)
-    image = ImageField(upload_to="uploads")
+    image = models.ImageField(upload_to="uploads")
 
     def __unicode__(self):
         return posixpath.basename(self.image.name)
 
     def to_json_data(self):
         url = self.image.url
-        parts = urlparse(url)
-        if parts.netloc == '':
-            newparts = list(parts)
-            domain = Site.objects.get_current().domain
-            newparts[0] = 'http'
-            newparts[1] = domain
-            url = urlunparse(newparts)
         data = {
             'deleteType': 'DELETE',
             'deleteUrl': url,
