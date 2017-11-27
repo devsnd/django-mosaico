@@ -13,7 +13,7 @@ from django.shortcuts import render
 from django.core.mail import send_mail
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.contrib.auth.decorators import user_passes_test
 from premailer import transform
 from PIL import Image, ImageDraw
@@ -103,6 +103,8 @@ def image(request):
             for upload in Upload.objects.all():
                 if upload.image.url == path:
                     break
+            else: #nobreak
+                return HttpResponseBadRequest()
             image = Image.open(upload.image.file)
             if not width:
                 width = upload.image.width
