@@ -56,9 +56,19 @@ $(function() {
     <link rel="stylesheet" href="{% static 'mosaico/dist/mosaico-material.min.css' %}" />
     <link rel="stylesheet" href="{% static 'mosaico/dist/vendor/notoregular/stylesheet.css' %}" />
     <link rel="stylesheet" href="{% static 'mosaico/dist/vendor/evol.colorpicker.min.css' %}" /> <!-- 2k -->
+    <style>
+      .return-to-admin {
+        position: absolute;
+        display: block;
+        width: 100%;
+        background-color: white;
+        z-index: 1000;
+        bottom: 0;
+      }
+    </style>
   </head>
-  <body class="mo-standalone">
-
-
+  <body>
+    <a class="return-to-admin" href="{% url 'admin:mosaico_template_changelist' %}">Return to django admin</a>
+    <div class="mo-standalone"></div>
   </body>
 </html>

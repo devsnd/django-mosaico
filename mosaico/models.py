@@ -15,7 +15,7 @@ class Upload(models.Model):
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to="uploads")
 
-    def __unicode__(self):
+    def __str__(self):
         return posixpath.basename(self.image.name)
 
     def to_json_data(self):
@@ -42,5 +42,5 @@ class Template(models.Model):
     template_data = JSONField()
     meta_data = JSONField()
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s - %s" % (self.name, self.key)
