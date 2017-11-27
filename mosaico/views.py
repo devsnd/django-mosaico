@@ -1,7 +1,10 @@
 import json
 import logging
 import json
-from urlparse import urlsplit
+try:
+    from urlparse import urlsplit
+except ImportError:
+    from urllib.parse import urlsplit
 
 from django.shortcuts import render
 from django.core.mail import send_mail
