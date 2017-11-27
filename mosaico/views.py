@@ -122,13 +122,15 @@ def template(request):
         html = request.POST['html']
         template_data = json.loads(request.POST['template_data'])
         meta_data = json.loads(request.POST['meta_data'])
-        template, created = Template.objects.get_or_create(
+        template, created = Template.objects.update_or_create(
             key=key,
-            name=name
+            name=name,
+            defaults=dict(
+                html=html,
+                template_data=template_data,
+                meta_data=meta_data,
+            )
         )
-        template.html = html
-        template.template_data = template_data
-        template.meta_data = meta_data
         template.save()
         response = HttpResponse("template saved", status=201)
     else:
