@@ -58,7 +58,7 @@ def download(request):
 @csrf_exempt
 def upload(request):
     if request.method == 'POST':
-        file = request.FILES.values()[0]
+        file = list(request.FILES.values())[0]
         upload = Upload(name=file.name, image=file)
         upload.save()
         uploads = [upload]
