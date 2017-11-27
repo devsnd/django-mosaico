@@ -1,6 +1,9 @@
 from __future__ import unicode_literals
 import posixpath
-from urlparse import urlparse, urlunparse
+try:
+    from urlparse import urlparse, urlunparse
+except ImportError:
+    from urllib.parse import urlparse, urlunparse
 
 from django.db import models
 from django.contrib.sites.models import Site
