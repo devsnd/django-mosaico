@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+import logging
 import posixpath
 try:
     from urlparse import urlparse, urlunparse
@@ -8,7 +9,7 @@ except ImportError:
 from django.db import models
 from django.contrib.sites.models import Site
 from sorl.thumbnail import ImageField
-from jsonfield import JSONField
+from django.contrib.postgres.fields.jsonb import JSONField
 
 
 class Upload(models.Model):
