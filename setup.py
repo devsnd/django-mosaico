@@ -18,7 +18,7 @@ setup(
     url='http://www.github.com/tubaman/django-mosaico/',
     author='Ryan Nowakowski',
     author_email='tubaman@fattuba.com',
-    install_requires = ['django>=1.9', 'django-jsonify', 'premailer>=3.0.0', 'sorl-thumbnail>=12.3'],
+    install_requires = ['django>=1.9', 'django-jsonify', 'premailer>=3.0.0'],
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
