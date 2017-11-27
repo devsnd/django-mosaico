@@ -1,6 +1,9 @@
 import json
 import logging
 import json
+
+from django.utils.html import strip_tags
+
 try:
     from urlparse import urlsplit
 except ImportError:
@@ -46,10 +49,9 @@ def download(request):
         to = request.POST['rcpt']
         subject = request.POST['subject']
         from_email = settings.DEFAULT_FROM_EMAIL
-        # TODO: convert the HTML email to a plain-text message here.  That way
-        # we can have both HTML and plain text.
-        msg = ""
-        send_mail(subject, msg, from_email, [to], html_message=html, fail_silently=False)
+        # TODO: the plain text generation is a bit brutal and might look bad
+        plain_text = strip_tags(html).replace('&nbsp;', ' ')
+        send_mail(subject, plain_text, from_email, [to], html_message=html, fail_silently=False)
         # TODO: return the mail ID here
         response = HttpResponse("OK: 250 OK id=12345")
     return response
